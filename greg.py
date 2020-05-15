@@ -1,5 +1,4 @@
 # Developer: Yannis Vasilopoulos
-# UCT Prague, June 2018
 # https://www.linkedin.com/in/giannis-vasilopoulos/
 # Revisited at UCL, January 2020
 
@@ -121,8 +120,8 @@ for modelname in modelnames:
     if os.path.isfile(Plot):
         os.remove(Plot)
     fig  = plt.figure()
-    plt.plot(t, model.g(a), lw=lwidth, c=palette[0], label='Experimental rate') 
-    plt.plot(t ,yfit, lw=lwidth, c=palette[1], label='Fit '+r'$R^{2} = '+str(round(r_squared,3))+'$')    
+    plt.plot(xdata, ydata, lw=lwidth, c=palette[0], label='Experimental rate') 
+    plt.plot(xdata ,yfit, lw=lwidth, c=palette[1], label='Fit '+r'$R^{2} = '+str(round(r_squared,3))+'$')    
     plt.xlabel(r'$ t ('+time_units+') $')
     plt.ylabel(r'$ g(a) $')
     plt.xlim(0.0,)
@@ -148,5 +147,23 @@ for modelname in modelnames:
         for i in range(len(xdata)):
             grate_csv.write(str(xdata[i])+','+str(ydata[i])+','+str(yfit[i])+'\n')
     grate_csv.close()
+
+    # Graph of the experimental and simulated conversion
+    Plot = os.path.join(GRAPH,modelname+'_a_vs_t.png')
+
+    # Clean previous runs
+    if os.path.isfile(Plot):
+        os.remove(Plot)
+    fig  = plt.figure()
+    plt.plot(xdata, a, lw=lwidth, c=palette[0], label='Experimental conversion') 
+    plt.plot(xdata , model.alpha(t,k), lw=lwidth, c=palette[1], label='Simulated conversion')    
+    plt.xlabel(r'$ t ('+time_units+') $')
+    plt.ylabel(r'$ a $')
+    plt.xlim(0.0,)
+    plt.ylim(0.0,1.0)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(Plot, format=graph_format, dpi=graph_dpi)
+    plt.close() # to avoid memory warnings
 
 ranking_csv.close() # close the exported csv
