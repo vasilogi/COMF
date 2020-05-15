@@ -32,7 +32,7 @@ def limit(x,y,blim,ulim):
     return x,y
 
 # The names of the models supported in this code
-modelnames = ["A2","A3","A4","D1","D2","D3","D4","F0","F1","F2","F3","P2","P3","P4","R2","R3"]
+modelnames = ["A2","A3","A4","D1","D3","F0","F1","F2","F3","P2","P3","P4","R2","R3"]
 
 # All the directories
 CWD       = os.getcwd()                                  # current working directory
@@ -40,7 +40,7 @@ DATA      = os.path.join(CWD,'data')                     # csv data files direct
 Csv       = [x for x in os.listdir(DATA) if ".csv" in x] # list all the csv files in cwd
 Csv_names = [x.split(".")[0] for x in Csv]               # list only the names of the csv files
 OUTPUT    = os.path.join(CWD,'output')                   # output directory
-OUTPUT    = os.path.join(OUTPUT,'greg')                  # output directory for the data regarding the integral rate fitting
+OUTPUT    = os.path.join(OUTPUT,'freg')                  # output directory for the data regarding the integral rate fitting
 GRAPH     = os.path.join(OUTPUT,'graphs')                # output directory for the graphs
 CSV       = os.path.join(OUTPUT,'csv')                   # output directory for the csv files
 
@@ -100,8 +100,11 @@ for modelname in modelnames:
     xdata          = t
     ydata          = model.g(a)
     params, extras = curve_fit(fit,xdata,ydata,bounds=(0.00001,10.0))
-    k              = params[0]                  # The Arrhenius k parameter
-    yfit           = [fit(i,k) for i in t]      # The simulated g values given the k calculation
+    k              = params[0]  # The Arrhenius k parameter    
+
+    ydata = model.f(a)                     # The experimental differential rate
+    yfit  = model.f(model.alpha(xdata,k))  # The simulated differential rate  
+
 
     # Calculate the determination coefficient
     residuals = np.array(ydata) - np.array(yfit)
@@ -114,7 +117,7 @@ for modelname in modelnames:
     	ranking_csv.write(str(modelname)+','+str(r_squared)+','+str(b_lim)+','+str(u_lim)+','+str(k)+'\n')
 
     # Export a graph for the fitting of the integral reaction rate
-    Plot = os.path.join(GRAPH,modelname+'_g_vs_t.png')
+    Plot = os.path.join(GRAPH,modelname+'_f_vs_t.png')
 
     # Clean previous runs
     if os.path.isfile(Plot):
@@ -123,7 +126,7 @@ for modelname in modelnames:
     plt.plot(xdata, ydata, lw=lwidth, c=palette[0], label='Experimental rate') 
     plt.plot(xdata ,yfit, lw=lwidth, c=palette[1], label='Fit '+r'$R^{2} = '+str(round(r_squared,3))+'$')    
     plt.xlabel(r'$ t ('+time_units+') $')
-    plt.ylabel(r'$ g(a) $')
+    plt.ylabel(r'$ f(a) $')
     plt.xlim(0.0,)
     plt.ylim(0.0,)
     plt.legend()
@@ -133,7 +136,7 @@ for modelname in modelnames:
 
 
 	# Create a CSV file to store the experimental rate and fit
-    File = os.path.join(CSV,modelname+'_grate_vs_t.csv')
+    File = os.path.join(CSV,modelname+'_frate_vs_t.csv')
     
     # Clean previous runs or create the header of this CSV
     if os.path.isfile(File):
@@ -147,23 +150,5 @@ for modelname in modelnames:
         for i in range(len(xdata)):
             grate_csv.write(str(xdata[i])+','+str(ydata[i])+','+str(yfit[i])+'\n')
     grate_csv.close()
-
-    # Graph of the experimental and simulated conversion
-    Plot = os.path.join(GRAPH,modelname+'_a_vs_t.png')
-
-    # Clean previous runs
-    if os.path.isfile(Plot):
-        os.remove(Plot)
-    fig  = plt.figure()
-    plt.plot(xdata, a, lw=lwidth, c=palette[0], label='Experimental conversion') 
-    plt.plot(xdata , model.alpha(t,k), lw=lwidth, c=palette[1], label='Simulated conversion')    
-    plt.xlabel(r'$ t ('+time_units+') $')
-    plt.ylabel(r'$ a $')
-    plt.xlim(0.0,)
-    plt.ylim(0.0,1.0)
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(Plot, format=graph_format, dpi=graph_dpi)
-    plt.close() # to avoid memory warnings
 
 ranking_csv.close() # close the exported csv
