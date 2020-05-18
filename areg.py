@@ -95,7 +95,7 @@ for modelname in modelnames:
 
     xdata          = t
     ydata          = a
-    params, extras = curve_fit(model.alpha,xdata,ydata,bounds=(0.0001,0.1))
+    params, extras = curve_fit(model.alpha,xdata,ydata,p0=0.1) # p0 : initial guess
     k              = params[0]                  # The Arrhenius k parameter
     yfit           = model.alpha(xdata,k)       # The simulated conversion values given the k calculation
 
@@ -104,6 +104,16 @@ for modelname in modelnames:
     ss_res    = np.sum(residuals**2.0)
     ss_tot    = np.sum((ydata-np.mean(ydata))**2.0)
     r_squared = 1.0 - (ss_res / ss_tot)
+
+    # Limit the output to avoid zero encountering problems
+
+    for bindx, ii in enumerate(yfit):
+        if ii == 0:
+            yfit[bindx] = 1e-4
+        elif ii == 1.0:
+            yfit[bindx] = 0.99999
+        else:
+            pass
 
     # Export the statistics data regarding the particular model
     with open(Csv,'a') as ranking_csv:

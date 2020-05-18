@@ -99,7 +99,7 @@ for modelname in modelnames:
 
     xdata          = t
     ydata          = model.g(a)
-    params, extras = curve_fit(fit,xdata,ydata,bounds=(0.00001,10.0))
+    params, extras = curve_fit(fit,xdata,ydata,p0=0.1)
     k              = params[0]                  # The Arrhenius k parameter
     yfit           = [fit(i,k) for i in t]      # The simulated g values given the k calculation
 
@@ -142,28 +142,29 @@ for modelname in modelnames:
         with open(File,'w') as grate_csv:
             grate_csv.write('time,experimental_rate,fit_rate'+'\n')
     
-    # Append data to this csv file
-    with open(File,'a') as grate_csv:
-        for i in range(len(xdata)):
-            grate_csv.write(str(xdata[i])+','+str(ydata[i])+','+str(yfit[i])+'\n')
-    grate_csv.close()
+    if (modelname != "D2") and (modelname != "D4"):
+	    # Append data to this csv file
+	    with open(File,'a') as grate_csv:
+	        for i in range(len(xdata)):
+	            grate_csv.write(str(xdata[i])+','+str(ydata[i])+','+str(yfit[i])+'\n')
+	    grate_csv.close()
 
-    # Graph of the experimental and simulated conversion
-    Plot = os.path.join(GRAPH,modelname+'_a_vs_t.png')
+	    # Graph of the experimental and simulated conversion
+	    Plot = os.path.join(GRAPH,modelname+'_a_vs_t.png')
 
-    # Clean previous runs
-    if os.path.isfile(Plot):
-        os.remove(Plot)
-    fig  = plt.figure()
-    plt.plot(xdata, a, lw=lwidth, c=palette[0], label='Experimental conversion') 
-    plt.plot(xdata , model.alpha(t,k), lw=lwidth, c=palette[1], label='Simulated conversion')    
-    plt.xlabel(r'$ t ('+time_units+') $')
-    plt.ylabel(r'$ a $')
-    plt.xlim(0.0,)
-    plt.ylim(0.0,1.0)
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(Plot, format=graph_format, dpi=graph_dpi)
-    plt.close() # to avoid memory warnings
+	    # Clean previous runs
+	    if os.path.isfile(Plot):
+	        os.remove(Plot)
+	    fig  = plt.figure()
+	    plt.plot(xdata, a, lw=lwidth, c=palette[0], label='Experimental conversion') 
+	    plt.plot(xdata , model.alpha(t,k), lw=lwidth, c=palette[1], label='Simulated conversion')    
+	    plt.xlabel(r'$ t ('+time_units+') $')
+	    plt.ylabel(r'$ a $')
+	    plt.xlim(0.0,)
+	    plt.ylim(0.0,1.0)
+	    plt.legend()
+	    plt.tight_layout()
+	    plt.savefig(Plot, format=graph_format, dpi=graph_dpi)
+	    plt.close() # to avoid memory warnings
 
 ranking_csv.close() # close the exported csv
