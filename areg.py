@@ -36,7 +36,12 @@ DATA      = os.path.join(CWD,'data')                     # csv data files direct
 Csv       = [x for x in os.listdir(DATA) if ".csv" in x] # list all the csv files in cwd
 Csv_names = [x.split(".")[0] for x in Csv]               # list only the names of the csv files
 OUTPUT    = os.path.join(CWD,'output')                   # output directory
-OUTPUT    = os.path.join(OUTPUT,'areg')                  # output directory for the data regarding the integral rate fitting
+
+# Limit the fitting region
+b_lim = 0.05 # bottom limit
+u_lim = 0.95 # upper limit
+
+OUTPUT    = os.path.join(OUTPUT,'areg_blim'+str(b_lim)+'_ulim_'+str(u_lim))                  # output directory for the data regarding the integral rate fitting
 GRAPH     = os.path.join(OUTPUT,'graphs')                # output directory for the graphs
 CSV       = os.path.join(OUTPUT,'csv')                   # output directory for the csv files
 
@@ -54,10 +59,6 @@ mass        = df["TG (mg)"].to_numpy()            # thermogravimetric mass
 temperature = df["Temperature (C)"].to_numpy()    # temperature
 conversion  = df["Conversion"].to_numpy()         # conversion fraction
 time_units  = 'min'                               # time units
-
-# Limit the fitting region
-b_lim = 0.05 # bottom limit
-u_lim = 0.95 # upper limit
 
 # Get the updated region to fit
 t, a = limit(time, conversion, b_lim, u_lim)
@@ -104,6 +105,9 @@ for modelname in modelnames:
     ss_res    = np.sum(residuals**2.0)
     ss_tot    = np.sum((ydata-np.mean(ydata))**2.0)
     r_squared = 1.0 - (ss_res / ss_tot)
+
+    if r_squared >= 0.975:
+        print(modelname+' model has a high determination coefficient: ', round(r_squared,3))
 
     # Limit the output to avoid zero encountering problems
 
