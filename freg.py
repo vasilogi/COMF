@@ -42,12 +42,12 @@ Csv_names = [x.split(".")[0] for x in Csv]               # list only the names o
 OUTPUT    = os.path.join(CWD,'output')                   # output directory
 
 # Limit the fitting region
-b_lim = 0.85 # bottom limit
+b_lim = 0.05 # bottom limit
 u_lim = 0.95 # upper limit
 
-OUTPUT    = os.path.join(OUTPUT,'freg_blim'+str(b_lim)+'_ulim_'+str(u_lim))                  # output directory for the data regarding the integral rate fitting
-GRAPH     = os.path.join(OUTPUT,'graphs')                # output directory for the graphs
-CSV       = os.path.join(OUTPUT,'csv')                   # output directory for the csv files
+OUTPUT    = os.path.join(OUTPUT,'freg_blim_'+str(b_lim)+'_ulim_'+str(u_lim)) # output directory for the data regarding the differential rate fitting
+GRAPH     = os.path.join(OUTPUT,'graphs')                                    # output directory for the graphs
+CSV       = os.path.join(OUTPUT,'csv')                                       # output directory for the csv files
 
 # Create necessary output directories
 if not os.path.exists(GRAPH): os.makedirs(GRAPH)
