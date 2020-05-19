@@ -35,16 +35,16 @@ palette      = ['#161925','#ba1f33','#1412ad'] # eerie black, cardinal, zaffree
 plt.ioff()
 
 # All the directories
-CWD       = os.getcwd()                                  # current working directory
-OUTPUT    = os.path.join(CWD,'output')                   # output directory
-RANKING     = os.path.join(OUTPUT,'ranking')               # output directory for the graphs
+CWD     = os.getcwd()                                  # current working directory
+OUTPUT  = os.path.join(CWD,'output')                   # output directory
+RANKING = os.path.join(OUTPUT,'ranking')               # output directory for the graphs
 
 # Create necessary output directories
 if not os.path.exists(RANKING): os.makedirs(RANKING)
 
 # Limit the fitting region
-b_lim = 0.05 # bottom limit
-u_lim = 0.15 # upper limit
+b_lim = float(sys.argv[1]) # bottom limit
+u_lim = float(sys.argv[2]) # upper limit
 
 ACSV = os.path.join(OUTPUT,'areg_blim_'+str(b_lim)+'_ulim_'+str(u_lim))
 GCSV = os.path.join(OUTPUT,'greg_blim_'+str(b_lim)+'_ulim_'+str(u_lim))
