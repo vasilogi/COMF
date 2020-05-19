@@ -28,6 +28,8 @@ def limit(x,y,blim,ulim):
     
     return x,y
 
+print('Regression in the conversion fraction')
+
 # The names of the models supported in this code
 modelnames = ["A2","A3","A4","D1","D3","F0","F1","F2","F3","P2","P3","P4","R2","R3"]
 
@@ -110,7 +112,7 @@ for modelname in modelnames:
     ss_tot    = np.sum((ydata-np.mean(ydata))**2.0)
     r_squared = 1.0 - (ss_res / ss_tot)
 
-    if r_squared >= 0.98:
+    if r_squared >= 0.98:    	
         print(modelname+' model has a high determination coefficient: ', round(r_squared,3))
 
     # Limit the output to avoid zero encountering problems

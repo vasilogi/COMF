@@ -22,6 +22,8 @@ import sys
 def R2_distance(x1,x2,x3):
     return np.sqrt( (1.0-x1)*(1.0-x1) + (1.0-x2)*(1.0-x2) + (1.0-x3)*(1.0-x3) )
 
+print('COMF ranking')
+
 # Basic plot settings
 graph_format = 'png'
 graph_dpi    = 300

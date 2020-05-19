@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 import pandas as pd
 from classes.reaction_rates import Model
+import sys
 
 # Fitting function
 def fit(t,k):
@@ -30,6 +31,8 @@ def limit(x,y,blim,ulim):
     x = [x_tmp[i] for i in range(len(y_tmp)) if y_tmp[i] <= ulim] # Upper limit the x-array
     
     return x,y
+
+print('Regression in the differential rate')
 
 # The names of the models supported in this code
 modelnames = ["A2","A3","A4","D1","D3","F0","F1","F2","F3","P2","P3","P4","R2","R3"]
