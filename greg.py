@@ -42,8 +42,8 @@ Csv_names = [x.split(".")[0] for x in Csv]               # list only the names o
 OUTPUT    = os.path.join(CWD,'output')                   # output directory
 
 # Limit the fitting region
-b_lim = 0.05 # bottom limit
-u_lim = 0.95 # upper limit
+b_lim = float(sys.argv[1]) # bottom limit
+u_lim = float(sys.argv[2]) # upper limit
 
 OUTPUT    = os.path.join(OUTPUT,'greg_blim_'+str(b_lim)+'_ulim_'+str(u_lim)) # output directory for the data regarding the integral rate fitting
 GRAPH     = os.path.join(OUTPUT,'graphs')                                    # output directory for the graphs
@@ -110,7 +110,7 @@ for modelname in modelnames:
     ss_tot    = np.sum((ydata-np.mean(ydata))**2.0)
     r_squared = 1.0 - (ss_res / ss_tot)
 
-    if r_squared >= 0.975:
+    if r_squared >= 0.98:
         print(modelname+' model has a high determination coefficient: ', round(r_squared,3))
 
     # Export the statistics data regarding the particular model

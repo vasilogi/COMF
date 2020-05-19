@@ -42,7 +42,7 @@ if not os.path.exists(RANKING): os.makedirs(RANKING)
 
 # Limit the fitting region
 b_lim = 0.05 # bottom limit
-u_lim = 0.95 # upper limit
+u_lim = 0.15 # upper limit
 
 ACSV = os.path.join(OUTPUT,'areg_blim_'+str(b_lim)+'_ulim_'+str(u_lim))
 GCSV = os.path.join(OUTPUT,'greg_blim_'+str(b_lim)+'_ulim_'+str(u_lim))
@@ -99,14 +99,18 @@ plt.scatter(x,R2_euclidean,
 			s=80,
 			c=palette[1],
 			edgecolors='black')
+# Check if there is NaN in euclidean
+if R2_euclidean[np.argmin(R2_euclidean)] != R2_euclidean[np.argmin(R2_euclidean)]:
+	R2_euclidean[np.argmin(R2_euclidean)] = 1e+2
+
 plt.scatter(x[np.argmin(R2_euclidean)],R2_euclidean[np.argmin(R2_euclidean)],
 			s=400,
 			c=palette[2],
 			marker='*',
 			edgecolors='black')
 plt.ylabel(r'$ d(R^{2}_{g},R^{2}_{a},R^{2}_{f}) $', fontsize=font_size)
-# plt.yscale('log')
-plt.ylim(0.0,)
+plt.yscale('log')
+# plt.ylim(0.0,)
 plt.grid(b=False, which='major', color='#D5DFE1', linestyle='-', linewidth=1)
 plt.xticks(x, models)
 plt.tick_params(which='both',direction='out')
@@ -129,3 +133,5 @@ with open(File,'a') as comf_csv:
     for i in range(len(R2_euclidean)):
         comf_csv.write(str(models[i])+','+str(R2_euclidean[i])+'\n')
 comf_csv.close()
+
+print(models[np.argmin(R2_euclidean)]+' is the best candidate model')
