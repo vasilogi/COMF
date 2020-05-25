@@ -1,15 +1,3 @@
-# time
-# temperature
-# temperature units
-# conversion
-# the fitted conversion from the 'inverse fit'
-# the fitted time from the 'inverse fit'
-# the polynomial that describes the 'inverse fit' t = f(a)
-# the fitted conversion from the 'normal fit'
-# the fitted time from the 'normal fit'
-# the polynomial that describes the 'normal fit' a = f(t)
-# the reaction rate calculated according to the 'normal fit'
-
 class Input_Data:
 
     """A class that stores the information for each different variable
