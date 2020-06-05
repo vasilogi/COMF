@@ -1,12 +1,31 @@
 # COMF
-COMF: Comprehensive Model-Fitting Method for Simulating Isothermal and Single-Step Solid-State Reactions
+
+COMF is a Python-based software for simulating isothermal solid-state reactions. It is based on the **Co**mprehensive **M**odel-**F**itting **M**ethod developed by [Y. Vasilopoulos et al.](https://www.mdpi.com/2073-4352/10/2/139/htm).
+
+## Installation
+
+Clone this repository using [GitHub](https://help.github.com/en/enterprise/2.13/user/articles/cloning-a-repository)
+
+```bash
+git clone https://github.com/vasilogi/COMF.git
+```
+
+or simply download it!
 
 ## Usage
 
-All parts of this software have been developed, run and tested on Unix machines.
+```python
+import foobar
 
-Run the bash script file `comf_run.sh` to automatically fit the experimental data found in `data` directory. The conversion fraction interval can be defined in `comf_run.sh` with the `blim` and `ulim` variables which indicate the bottom and upper limit respectively.
+foobar.pluralize('word') # returns 'words'
+foobar.pluralize('goose') # returns 'geese'
+foobar.singularize('phenomena') # returns 'phenomenon'
+```
 
-### References
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-[Vasilopoulos, Y., Skořepová, E., & Šoóš, M. (2020). COMF: Comprehensive Model-Fitting Method for Simulating Isothermal and Single-Step Solid-State Reactions. Crystals, 10(2), 139.](https://www.mdpi.com/2073-4352/10/2/139/htm)
+Please make sure to update tests as appropriate.
+
+## License
+[GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/)
