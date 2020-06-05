@@ -1,6 +1,6 @@
 # COMF
 
-COMF is a Python-based software for simulating isothermal solid-state reactions. It is based on the **Co**mprehensive **M**odel-**F**itting **M**ethod developed by [Y. Vasilopoulos et al.](https://www.mdpi.com/2073-4352/10/2/139/htm).
+COMF is a Python-based software for simulating isothermal solid-state reactions. It is based on the **Co**mprehensive **M**odel-**F**itting **M**ethod developed by [Y. Vasilopoulos et al](https://www.mdpi.com/2073-4352/10/2/139/htm).
 
 ## Installation
 
@@ -13,6 +13,8 @@ git clone https://github.com/vasilogi/COMF.git
 or simply download it!
 
 ## Usage
+
+Add your data to the `data` directory
 
 ```python
 import foobar
