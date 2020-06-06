@@ -2,7 +2,7 @@
 
 COMF is a Python-based open-source thermal analysis software. It is essentially a tool to obtain kinetic information from thermogravimetric analysis (TGA) data to characterise solid materials, particularly of pharmaceutical, petrochemical, food and environmental interest. It basically provides a full kinetic analysis of these data, including the determination of the **reaction model** and calculation of the **activation energy**, i.e. generally the kinetic triplet, for isothermal solid-state reactions. It can be used to investigate physicochemical phenomena, such as phase transitions, desolvation/dehydration of pharmaceutical solvates/hydrates, absorption, adsorption and desorption, thermal decomposition, and solid-gas reactions, e.g. oxidation or reduction. This software is based on two methods:
 
-1. the **Co**mprehensive **M**odel-**F**itting **M**ethod developed by [Y. Vasilopoulos et al](https://www.mdpi.com/2073-4352/10/2/139/htm) (here you can find also what models are supported by this software)
+1. the **Co**mprehensive **M**odel-**F**itting **M**ethod developed by [Y. Vasilopoulos et al.](https://www.mdpi.com/2073-4352/10/2/139/htm) (here you can find also what models are supported by this software)
 2. and the integral isoconversional method
 
 This software can be used also for complex multi-step reactions (with a bit of manual labour)!
