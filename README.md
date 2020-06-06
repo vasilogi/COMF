@@ -5,6 +5,8 @@ COMF is a Python-based open-source thermal analysis software. It is essentially 
 1. the **Co**mprehensive **M**odel-**F**itting **M**ethod developed by [Y. Vasilopoulos et al](https://www.mdpi.com/2073-4352/10/2/139/htm) (here you can find also what models are supported by this software)
 2. and the integral isoconversional method
 
+This software can be used also for complex multi-step reactions (with a bit of manual labour)!
+
 ## Installation
 
 Clone this repository using [GitHub](https://help.github.com/en/enterprise/2.13/user/articles/cloning-a-repository)
@@ -30,16 +32,22 @@ Add your data to the [data](./data) directory in a CSV format. The CSV file must
 
 ### Implement the isoconversional method
 
-Open the [isoconversional analysis Jupyter notebook](./iso-analysis.ipynb).
-
-
+Open the [isoconversional analysis Jupyter notebook](./iso-analysis.ipynb). Depending on your data, take special care of the degree of the polynomial used to fit the experimental conversion fraction!
 
 ```python
-import foobar
-
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
+fit_degree    = 9                            # degree of the polynomial
+coefs         = np.polyfit(a,t,fit_degree)   # polynomial coefficients
+t_polynomial  = np.poly1d(coefs)             # the polynomial 
+a_inverse_fit = np.linspace(a[0],a[-1],2000) # interpolate to these new points
+t_inverse_fit = t_polynomial(a_inverse_fit)  # fit the function t = t(a) inverse of the original data 
+```
+and
+```python
+fit_degree   = 9                            
+coefs        = np.polyfit(t,a,fit_degree)
+a_polynomial = np.poly1d(coefs)
+t_normal_fit = np.linspace(t[0],t[-1],2000)
+a_normal_fit = a_polynomial(t_normal_fit)
 ```
 
 ## Contributing
