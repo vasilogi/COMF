@@ -28,8 +28,26 @@ def limit(x,y,blim,ulim):
     
     return x,y
 
-print('Regression in the conversion fraction')
-print('-------------------------------------')
+print('')
+print('')
+print(' ▄████▄   ▒█████   ███▄ ▄███▓  █████▒')
+print('▒██▀ ▀█  ▒██▒  ██▒▓██▒▀█▀ ██▒▓██   ▒ ')
+print('▒▓█    ▄ ▒██░  ██▒▓██    ▓██░▒████ ░ ')
+print('▒▓▓▄ ▄██▒▒██   ██░▒██    ▒██ ░▓█▒  ░ ')
+print('▒ ▓███▀ ░░ ████▓▒░▒██▒   ░██▒░▒█░    ')
+print('░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░   ░  ░ ▒ ░    ')
+print('  ░  ▒     ░ ▒ ▒░ ░  ░      ░ ░      ')
+print('░        ░ ░ ░ ▒  ░      ░    ░ ░    ')
+print('░ ░          ░ ░         ░           ')
+print('░                                    ')
+print('')
+
+print('Sit back and feel the comfort... COMF starts running')
+
+print('')
+print('+---------------------------------------+')
+print('| Regression in the conversion fraction |')
+print('+---------------------------------------+')
 
 # The names of the models supported in this code
 modelnames = ["A2","A3","A4","D1","D3","F0","F1","F2","F3","P2","P3","P4","R2","R3"]
