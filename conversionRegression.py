@@ -5,7 +5,7 @@ import os
 import numpy as np
 from classes.reaction_rates import Model
 from classes.arrhenius import rateConstant
-from classes.regressors import conversionRegression
+from classes.regressors import conversionRegression, integralRateRegression
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -29,7 +29,13 @@ temperature  = df['temperature'].to_numpy()[0]
 # pick up the model
 model = Model('A2')
 
+# conversion regression
 yfit, r_squared = conversionRegression(time, conversion, model)
 
-plt.plot(time,conversion)
-plt.plot(time,yfit,linestyle='--')
+# integral rate regression
+yfit, r_squared = integralRateRegression(time, conversion, model)
+
+# g = np.array([model.g(i) for i in conversion])
+
+# plt.plot(time,g)
+# plt.plot(time,yfit,linestyle='--')
