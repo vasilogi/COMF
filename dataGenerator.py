@@ -41,4 +41,4 @@ for T in temperature:
     # CSV filename
     Csv = os.path.join(DATA,str(T)+'_Kelvin.csv')
     # dataframe to csv
-    df.to_csv(Csv)
+    df.to_csv(Csv,index=False)
