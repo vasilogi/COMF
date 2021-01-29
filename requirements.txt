@@ -1,0 +1,10 @@
+conda create --name COMF
+conda install python=3.7
+conda install jupyter
+
+
+
+numpy
+scipy
+matplotlib
+scikit-learn

@@ -1,9 +1,4 @@
-# Developer: Yannis Vasilopoulos
-# https://www.linkedin.com/in/giannis-vasilopoulos/
-# Revisited at UCL, January 2020
-
-# Program for performing the model-fitting method
-# on isothermal thermogravimetric data (TGA)
+# a program to fit the experimental conversion fraction
 
 # FIT ON THE INTEGRAL REACTION RATE
 
