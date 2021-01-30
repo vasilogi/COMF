@@ -22,7 +22,7 @@ def conversionRegression(time,conversion,model):
     ss_tot    = np.sum((y-np.mean(y))**2.0)
     r_squared = 1.0 - (ss_res / ss_tot)
 
-    return yfit, r_squared
+    return yfit, k, r_squared
 
 def integralRateRegression(time,conversion,model):
     # perform Non-Linear Regression
@@ -42,4 +42,4 @@ def integralRateRegression(time,conversion,model):
     ss_tot    = np.sum((y-np.mean(y))**2.0)
     r_squared = 1.0 - (ss_res / ss_tot)
 
-    return yfit, r_squared
+    return yfit, k, r_squared

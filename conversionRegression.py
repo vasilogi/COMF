@@ -15,7 +15,7 @@ MAIN_DIR  = os.getcwd()                   # current working directory
 DATA      = os.path.join(MAIN_DIR,'data') # data directory
 
 # models names supported in this code
-modelNames = ["A2","A3","A4","D1","D3","F0","F1","F2","F3","P2","P3","P4","R2","R3"]
+modelNames = ["A2","A3","A4","D1","D2","D3","D4","F0","F1","F2","F3","P2","P3","P4","R2","R3"]
 
 # get the data from the csv files
 Data = os.listdir(DATA)
@@ -23,20 +23,36 @@ Data = [os.path.join(DATA,i) for i in Data]
 
 case = Data[0]
 
-# read a data file
-conversion, time, temperature = read_datafile(case)
+for modelName in modelNames:
 
-# pick up the model
-model = Model('A2')
+    # read a data file
+    conversion, time, temperature = read_datafile(case)
 
-# conversion regression
-yfit, r_squared = conversionRegression(time, conversion, model)
+    # pick up the model
+    model = Model(modelName)
 
-# integral rate regression
-yfit, r_squared = integralRateRegression(time, conversion, model)
+    # integral rate regression
+    yfit, k_integral, r_squared_integral = integralRateRegression(time, conversion, model)
 
-g = np.array([model.g(i) for i in conversion])
+    # conversion regression
+    if modelName not in ['D2','D4']:
+        yfit, k_alpha, r_squared_alpha    = conversionRegression(time, conversion, model)
+    else:
+        r_squared_alpha = r_squared_integral
 
-plt.plot(time,g)
-plt.plot(time,yfit,linestyle='--')
+    # pass the data to a dictionary
+    data = {'temperature': temperature,
+            'model': modelName,
+            'rate_constant - alpha': k_alpha,
+            'rate_constant - integral': k_integral,
+            'R2 - alpha': round(r_squared_alpha,5),
+            'R2 - integral': round(r_squared_integral,5)}
 
+    print(data)
+
+    # g = np.array([model.g(i) for i in conversion])
+
+    # plt.plot(time,g)
+    # plt.plot(time,yfit,linestyle='--')
+
+    # temperature | model | R2 - alpha | R2 - integral
